@@ -2,50 +2,45 @@ package com.fingeso.backend.Services;
 
 import com.fingeso.backend.Models.Idea;
 import com.fingeso.backend.Repository.IdeaRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Calendar;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/idea")
+@RequestMapping(value = "/ideas")
 public class IdeaService {
-
     @Autowired
-    private IdeaRepository ideaRepository;
-    //Muestra todas las ideas
+    private IdeaRepository repository;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Idea> getAllIdea(){
-        return ideaRepository.findAll();
+        return repository.findAll();
     }
-    //Busca una idea por id
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Idea getIdeaById(@PathVariable String id){
-        return this.ideaRepository.findIdeaById(id);
+    public Idea getIdeaById(@PathVariable("id") ObjectId id){
+        return repository.findBy_id(id);
     }
-    //Modificar una idea
+
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Idea updateIdea(@RequestBody Idea idea, @PathVariable String id){
-        idea = this.ideaRepository.findIdeaById(id);
-        idea.setNombre(idea.getNombre());
-        idea.setDescripcion(idea.getDescripcion());
-        //idea.setAutor(idea.getAutor());
-        return this.ideaRepository.save(idea);
+    public void modifyIdeaById(@PathVariable("id") ObjectId id, @Valid@RequestBody Idea idea){
+        idea.set_id(id);
+        repository.save(idea);
     }
-    //Elimina una idea por id
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void deleteIdea(@PathVariable String id){
-        Idea idea = this.ideaRepository.findIdeaById(id);
-        this.ideaRepository.delete(idea);
-    }
-    //Crear idea ¿?
+
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public Idea createIdea(@RequestBody Idea idea){
-        Calendar today = Calendar.getInstance();
-        idea.setFechaCreacion(today.getTime());
-        ideaRepository.save(idea);
+    public Idea createIdea(@Valid @RequestBody Idea idea){
+        idea.set_id(ObjectId.get());
+        repository.save(idea);
         return idea;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deleteIdea(@PathVariable ObjectId id){
+        repository.delete(repository.findBy_id(id));
     }
 
 
