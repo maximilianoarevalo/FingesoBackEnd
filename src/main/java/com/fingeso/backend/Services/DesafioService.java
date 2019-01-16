@@ -1,45 +1,81 @@
 package com.fingeso.backend.Services;
 
 import com.fingeso.backend.Models.Desafio;
+import com.fingeso.backend.Models.Idea;
 import com.fingeso.backend.Repository.DesafioRepository;
+import com.fingeso.backend.Repository.IdeaRepository;
+import com.fingeso.backend.Repository.UsuarioRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/desafios")
 public class DesafioService {
     @Autowired
-    private DesafioRepository repository;
+    private DesafioRepository desafiorepository;
+    @Autowired
+    private IdeaRepository ideaRepository;
+    //@Autowired
+    //private UsuarioRepository usuarioRepository;
 
+
+    // Crud DESAFIO
+    //////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Desafio> getAllDesafio(){
-        return repository.findAll();
+        return desafiorepository.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public  Desafio getDesafioById(@PathVariable("id") ObjectId id){
-        return  repository.findBy_id(id);
+        return  desafiorepository.findBy_id(id);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public void modifyDesafioById(@PathVariable("id") ObjectId id, @Valid@RequestBody Desafio desafio){
         desafio.set_id(id);
-        repository.save(desafio);
+        desafiorepository.save(desafio);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public Desafio createDesafio(@Valid @RequestBody Desafio desafio){
         desafio.set_id(ObjectId.get());
-        repository.save(desafio);
+        desafiorepository.save(desafio);
         return desafio;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteDesafio(@PathVariable ObjectId id){
-        repository.delete(repository.findBy_id(id));
+        desafiorepository.delete(desafiorepository.findBy_id(id));
     }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    // Agrega ID Idea a Arreglo de IDeas de Desafios
+    @RequestMapping(value = "/{idDesafio}/addIdea/{idIdea}", method = RequestMethod.POST)
+    @ResponseBody
+    public void addIdeaInsideDesafio(@PathVariable("idDesafio") ObjectId idDesafio,@PathVariable("idIdea") ObjectId idIdea ){
+
+        Desafio desafio = this.desafiorepository.findBy_id(idDesafio);
+        Idea idea = this.ideaRepository.findBy_id(idIdea);
+
+        List<Idea> ideas = desafio.getIdeas();
+
+        ideas.add(idea);
+
+        this.desafiorepository.save(desafio);
+    }
+
+
+
+
+
+
+
 }

@@ -1,11 +1,14 @@
 package com.fingeso.backend.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 //@Document(collection = "desafios")
 public class Desafio {
@@ -13,18 +16,32 @@ public class Desafio {
     private ObjectId _id;
     private String nombre;
     private String descripcion;
+
+    @JsonIgnore
+    @DBRef
+    private List<Idea> ideas;
+
+
+
+
     private LocalDateTime fechaPublicacion;
+
+
+
     //Falta agregar quien creo que desafio
     //Falta agregar las ideas pertenecientes a este desafio
 
-    public Desafio(){}
+    //public Desafio(){}
 
-    public Desafio(ObjectId _id, String nombre, String descripcion){
+    /*public Desafio(ObjectId _id, String nombre, String descripcion){
         this._id = _id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.ideas = List<Idea>();
         this.fechaPublicacion = LocalDateTime.now();
-    }
+    }*/
+
+
 
     public String get_id(){
         return _id.toHexString();
@@ -49,4 +66,16 @@ public class Desafio {
     public void setDescripcion(String descripcion){
         this.descripcion = descripcion;
     }
+
+
+    public List<Idea> getIdeas() {
+        return ideas;
+    }
+
+    public void addIdea(Idea idea) {
+        this.ideas.add(idea);
+    }
+
+
+
 }

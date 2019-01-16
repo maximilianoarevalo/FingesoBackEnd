@@ -17,6 +17,10 @@ public class ComentarioService {
     @Autowired
     private ComentarioRepository repository;
 
+
+
+    // CRUD
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Comentario> getAllComentario(){
         return repository.findAll();
@@ -44,7 +48,7 @@ public class ComentarioService {
     public void deleteComentario(@PathVariable ObjectId id){
         repository.delete(repository.findBy_id(id));
     }
-
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
