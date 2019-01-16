@@ -57,7 +57,7 @@ public class IdeaService {
     // Agrega ID comentario a Arreglo de comentarios de Idea
     @RequestMapping(value = "/{idIdea}/addComentario/{idComentario}", method = RequestMethod.POST)
     @ResponseBody
-    public void addcomentarioInsideIdea(@PathVariable("idIDea") ObjectId idIdea,@PathVariable("idComentario") ObjectId idComentario ){
+    public void addcomentarioInsideIdea(@PathVariable("idIdea") ObjectId idIdea,@PathVariable("idComentario") ObjectId idComentario ){
 
         Idea idea = this.ideaRepository.findBy_id(idIdea);
         Comentario comentario = this.comentarioRepository.findBy_id(idComentario);

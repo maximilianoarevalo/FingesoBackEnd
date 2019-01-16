@@ -16,12 +16,7 @@ public class Desafio {
     private ObjectId _id;
     private String nombre;
     private String descripcion;
-
-    @JsonIgnore
-    @DBRef
     private List<Idea> ideas;
-
-
 
 
     private LocalDateTime fechaPublicacion;
@@ -31,15 +26,15 @@ public class Desafio {
     //Falta agregar quien creo que desafio
     //Falta agregar las ideas pertenecientes a este desafio
 
-    //public Desafio(){}
+    public Desafio(){}
 
-    /*public Desafio(ObjectId _id, String nombre, String descripcion){
+    public Desafio(ObjectId _id, String nombre, String descripcion,List<Idea> ideas){
         this._id = _id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.ideas = List<Idea>();
+        this.ideas = ideas;
         this.fechaPublicacion = LocalDateTime.now();
-    }*/
+    }
 
 
 

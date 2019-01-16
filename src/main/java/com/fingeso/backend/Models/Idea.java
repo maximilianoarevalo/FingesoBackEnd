@@ -16,10 +16,6 @@ public class Idea {
     private ObjectId _id;
     private String nombre;
     private String descripcion;
-
-
-
-    @JsonIgnore
     @DBRef
     private List<Comentario> comentarios;
     private LocalDateTime fechaCreacion;
