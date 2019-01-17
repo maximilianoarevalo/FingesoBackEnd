@@ -14,18 +14,18 @@ public class Comentario {
         private ObjectId _id;
         //private Usuario autor;
         private String autor;
-        @DBRef
-        private String comentario;
-        private LocalDateTime fechaCreacion;
+        //@DBRef
+        //private String comentario;
+        //private LocalDateTime fechaCreacion;
 
 
-        public Comentario(){}
+        //public Comentario(){}
 
         public Comentario(ObjectId _id, String autor, String comentario){
                 this._id = _id;
                 this.autor = autor;
-                this.comentario = comentario;
-                this.fechaCreacion = LocalDateTime.now();
+                //this.comentario = comentario;
+                //this.fechaCreacion = LocalDateTime.now();
         }
 
         public String get_id(){
@@ -40,11 +40,11 @@ public class Comentario {
         public void setautor(String autor){
                 this.autor = autor;
         }
-        public String getcomentario(){
+        /*public String getcomentario(){
                 return comentario;
         }
         public void setcomentario(String comentario){
                 this.comentario = comentario;
-        }
+        }*/
 
 }
