@@ -19,7 +19,7 @@ public class Comentario {
         private LocalDateTime fechaCreacion;
 
 
-        //public Comentario(){}
+        public Comentario(){}
 
         public Comentario(ObjectId _id, String autor, String comentario){
                 this._id = _id;

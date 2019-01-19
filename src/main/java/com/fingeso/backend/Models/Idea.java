@@ -20,7 +20,7 @@ public class Idea {
     private List<Comentario> comentarios;
     private LocalDateTime fechaCreacion;
 
-    //public Idea(){}
+    public Idea(){}
 
     public Idea(ObjectId _id, String nombre, String descripcion){
         this._id = _id;
