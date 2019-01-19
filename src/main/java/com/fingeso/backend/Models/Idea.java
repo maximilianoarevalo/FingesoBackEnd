@@ -20,15 +20,15 @@ public class Idea {
     private List<Comentario> comentarios;
     private LocalDateTime fechaCreacion;
 
-    public Idea(){}
+    //public Idea(){}
 
-    /*public Idea(ObjectId _id, String nombre, String descripcion){
+    public Idea(ObjectId _id, String nombre, String descripcion){
         this._id = _id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.comentarios = List<Comentario>();
+        this.comentarios =new  ArrayList<Comentario>();
         this.fechaCreacion = LocalDateTime.now();
-    }*/
+    }
 
     public String get_id(){
         return _id.toHexString();
@@ -52,5 +52,11 @@ public class Idea {
 
     public List<Comentario> getComentarios() {
         return comentarios;
+    }
+    public void setComentarios(List<Comentario> comentarios){
+      this.comentarios=comentarios;
+    }
+    public void agregarComentario(Comentario comentario){
+      comentarios.add(comentario);
     }
 }

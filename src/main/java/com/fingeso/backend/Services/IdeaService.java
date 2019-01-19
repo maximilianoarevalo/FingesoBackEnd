@@ -28,12 +28,16 @@ public class IdeaService {
     public List<Idea> getAllIdea(){
         return ideaRepository.findAll();
     }
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Idea getIdeaById(@PathVariable("id") ObjectId id){
         return ideaRepository.findBy_id(id);
     }
 
+    @RequestMapping(value = "/{id}/comentarios", method = RequestMethod.GET)
+    public List<Comentario> getAllComentarioInIdea(@PathVariable("id") ObjectId id){
+        Idea idea = this.ideaRepository.findBy_id(id);
+        return idea.getComentarios();
+    }
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public void modifyIdeaById(@PathVariable("id") ObjectId id, @Valid@RequestBody Idea idea){
         idea.set_id(id);
@@ -55,18 +59,16 @@ public class IdeaService {
 
 
     // Agrega ID comentario a Arreglo de comentarios de Idea
-    @RequestMapping(value = "/{idIdea}/addComentario/{idComentario}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}/addComentario", method = RequestMethod.POST)
     @ResponseBody
-    public void addcomentarioInsideIdea(@PathVariable("idIdea") ObjectId idIdea,@PathVariable("idComentario") ObjectId idComentario ){
-
-        Idea idea = this.ideaRepository.findBy_id(idIdea);
-        Comentario comentario = this.comentarioRepository.findBy_id(idComentario);
-        List<Comentario> Comentarios = idea.getComentarios();
-
-        Comentarios.add(comentario);
-        this.ideaRepository.save(idea);
+    public void addcomentarioInsideIdea(@PathVariable("id") ObjectId id,@Valid @RequestBody Comentario comentario ){
+      comentario.set_id(ObjectId.get());
+      this.comentarioRepository.save(comentario);
+      Idea idea = this.ideaRepository.findBy_id(id);
+      List<Comentario> Comentarios = idea.getComentarios();
+      idea.agregarComentario(comentario);
+      this.ideaRepository.save(idea);
     }
-
 
     // Buscar Idea por Titulo
     @RequestMapping(value = "/buscar/{String}", method = RequestMethod.GET)

@@ -40,14 +40,13 @@ public class UsuarioService {
   }
 
   @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-  public Idea createIdeaByUsuario(@PathVariable("id") ObjectId id,@Valid @RequestBody Idea idea){
+  public void createIdeaByUsuario(@PathVariable("id") ObjectId id,@Valid @RequestBody Idea idea){
       ObjectId ideaId=ObjectId.get();
       idea.set_id(ideaId);
       ideaRepository.save(idea);
       Usuario usuario=usuarioRepository.findBy_id(id);
       usuario.crearIdea(ideaId);
       usuarioRepository.save(usuario);
-      return idea;
   }
   @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
   public void deleteUsuario(@PathVariable ObjectId id){
