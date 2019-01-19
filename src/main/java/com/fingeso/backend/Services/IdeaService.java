@@ -68,7 +68,13 @@ public class IdeaService {
     }
 
 
+    // Buscar Idea por Titulo
+    @RequestMapping(value = "/buscar/{String}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Idea> buscarIdeaPorTitulo(@PathVariable("String") String titulo ){
 
+        return this.ideaRepository.findIdeaByNombre(titulo);
+    }
 
 
 
