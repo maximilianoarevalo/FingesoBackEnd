@@ -73,7 +73,13 @@ public class DesafioService {
         this.desafiorepository.save(desafio);
     }
 
+    // Obtener Todas las Ideas de un Desafio
 
+    @RequestMapping(value = "/{id}/getideas", method = RequestMethod.GET)
+    public List<Idea> getAllIdeasInDesafio(@PathVariable("id") ObjectId id){
+        Desafio desafio = this.desafiorepository.findBy_id(id);
+        return desafio.getIdeas();
+    }
 
 
 

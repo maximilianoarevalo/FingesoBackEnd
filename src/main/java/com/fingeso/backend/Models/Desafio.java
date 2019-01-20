@@ -64,7 +64,7 @@ public class Desafio {
 
 
     public List<Idea> getIdeas() {
-        return ideas;
+        return this.ideas;
     }
 
     public void addIdea(Idea idea) {
