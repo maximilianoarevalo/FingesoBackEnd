@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+import static ch.qos.logback.core.joran.action.ActionConst.NULL;
+
 @CrossOrigin(origins = "http://localhost:4200",maxAge = 3600)
 @RestController
 @RequestMapping(value = "/ideas")
@@ -74,6 +76,14 @@ public class IdeaService {
     @RequestMapping(value = "/buscar/{String}", method = RequestMethod.GET)
     @ResponseBody
     public List<Idea> buscarIdeaPorTitulo(@PathVariable("String") String titulo ){
+
+
+
+        /*if(titulo.equals("a")){
+
+
+            return this.ideaRepository.findAll();
+        }*/
 
         return this.ideaRepository.findIdeaByNombre(titulo);
     }

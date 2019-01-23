@@ -26,9 +26,9 @@ public class Desafio {
     //Falta agregar quien creo que desafio
     //Falta agregar las ideas pertenecientes a este desafio
 
-    public Desafio(){}
+   // public Desafio(){}
 
-    public Desafio(ObjectId _id, String nombre, String descripcion,List<Idea> ideas){
+    public Desafio(){
         this._id = _id;
         this.nombre = nombre;
         this.descripcion = descripcion;
