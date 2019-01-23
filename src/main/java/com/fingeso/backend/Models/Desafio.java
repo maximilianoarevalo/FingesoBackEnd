@@ -29,10 +29,11 @@ public class Desafio {
    // public Desafio(){}
 
     public Desafio(){
+
         this._id = _id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.ideas = ideas;
+        this.ideas = new ArrayList<Idea>();
         this.fechaPublicacion = LocalDateTime.now();
     }
 

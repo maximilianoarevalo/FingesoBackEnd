@@ -59,12 +59,14 @@ public class DesafioService {
 
 
     // Agrega ID Idea a Arreglo de IDeas de Desafios
-    @RequestMapping(value = "/{idDesafio}/addIdea/{idIdea}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{idDesafio}/addIdea", method = RequestMethod.POST)
     @ResponseBody
-    public void addIdeaInsideDesafio(@PathVariable("idDesafio") ObjectId idDesafio,@PathVariable("idIdea") ObjectId idIdea ){
+    public void addIdeaInsideDesafio(@PathVariable("idDesafio") ObjectId idDesafio,@Valid @RequestBody Idea idea){
 
         Desafio desafio = this.desafiorepository.findBy_id(idDesafio);
-        Idea idea = this.ideaRepository.findBy_id(idIdea);
+
+        idea.set_id(ObjectId.get());
+
 
         List<Idea> ideas = desafio.getIdeas();
 
