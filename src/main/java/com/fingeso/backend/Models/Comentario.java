@@ -1,5 +1,6 @@
 package com.fingeso.backend.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -13,15 +14,21 @@ public class Comentario {
         @Id
         private ObjectId _id;
         //private Usuario autor;
-        private String autor;
-        //@DBRef
+
         private String comentario;
+
+        @JsonIgnore
+        @DBRef
+        private String autor;
+
+
+        @JsonIgnore
         private LocalDateTime fechaCreacion;
 
 
-        public Comentario(){}
+        //public Comentario(){}
 
-        public Comentario(ObjectId _id, String autor, String comentario){
+        public Comentario(){
                 this._id = _id;
                 this.autor = autor;
                 this.comentario = comentario;

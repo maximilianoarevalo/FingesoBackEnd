@@ -65,10 +65,11 @@ public class IdeaService {
     @ResponseBody
     public void addcomentarioInsideIdea(@PathVariable("id") ObjectId id,@Valid @RequestBody Comentario comentario ){
       comentario.set_id(ObjectId.get());
-      this.comentarioRepository.save(comentario);
+        System.out.println(comentario.getcomentario());
+      Comentario comentario1 = this.comentarioRepository.save(comentario);
       Idea idea = this.ideaRepository.findBy_id(id);
       List<Comentario> Comentarios = idea.getComentarios();
-      idea.agregarComentario(comentario);
+      idea.agregarComentario(comentario1);
       this.ideaRepository.save(idea);
     }
 
@@ -78,16 +79,13 @@ public class IdeaService {
     public List<Idea> buscarIdeaPorTitulo(@PathVariable("String") String titulo ){
 
 
-
         /*if(titulo.equals("a")){
-
-
             return this.ideaRepository.findAll();
         }*/
-
         return this.ideaRepository.findIdeaByNombre(titulo);
     }
 
+    
 
 
 
