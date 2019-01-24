@@ -12,3 +12,8 @@ public interface IdeaRepository extends MongoRepository<Idea, String> {
     Idea findBy_id(ObjectId _id);
     List<Idea> findIdeaByNombre(String titulo);
 }
+@CrossOrigin(origins = "http://localhost:4200",maxAge = 3600)
+public interface IdeaRepository extends MongoRepository<Idea, String> {
+    Idea findBy_id(ObjectId _id);
+    List<Idea> findIdeaByNombre(String titulo);
+}

@@ -1,7 +1,6 @@
 package com.fingeso.backend.Services;
 
 import com.fingeso.backend.Models.Comentario;
-import com.fingeso.backend.Models.Desafio;
 import com.fingeso.backend.Models.Idea;
 import com.fingeso.backend.Repository.ComentarioRepository;
 import com.fingeso.backend.Repository.IdeaRepository;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
-import static ch.qos.logback.core.joran.action.ActionConst.NULL;
 
 @CrossOrigin(origins = "http://localhost:4200",maxAge = 3600)
 @RestController
@@ -85,7 +82,7 @@ public class IdeaService {
         return this.ideaRepository.findIdeaByNombre(titulo);
     }
 
-    
+
 
 
 
